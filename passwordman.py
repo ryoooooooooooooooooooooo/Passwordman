@@ -1,5 +1,5 @@
-
-import random
+import string
+import secrets
 service_info = input('enter name of services(Gooogle, Spotify etc....)')
 name_info = input('enter your emailaddr or username')
 m = input('select a mode from(s:SAVE/g:GENERATE/dp:DISPLAY_PASSWORD/du:DISPLAY_USERNAME)')
@@ -8,12 +8,9 @@ def save_password(password):
             t.write(f'\n{service_info},{name_info},{password}\n')
         return f'{password} and {name_info} were registered in {service_info}'
 def generate_password(length):       
-    numberofinput=int(input("enter the length of password"))
-    uppercases = ["A","B","C","D","E","F","G","H","I","J","K","L","M",'N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-    lowercases = ['a','b','c','d','e','f','g','h','i','j','k','l','n','m','o','p','q','r','s','t','u','v','w','x','y','z']
-    numbers = ['2', '1', '3', '4', '5', '6', '7', '8', '9', '10']
-    content = uppercases + lowercases + numbers
-    password = ''.join(random.choices(content, k=numberofinput))
+    passlength=int(input("enter the length of password"))
+    alphabet = string.ascii_letters + string.digits
+    password = ''.join(secrets.choice(alphabet) for i in range(passlength)) 
     save_password(password)
     return password
 def display_password(k):                           
